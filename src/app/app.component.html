@@ -1,21 +1,35 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom mb-4">
+        <a class="navbar-brand" href="#">
+            <i class="far fa-sun"></i>
+            <span>Forecast</span>
+        </a>
+        <button class="navbar-toggler hidden-lg-up" type="button" (click)="isCollapsed = !isCollapsed">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
+            <form class="form-inline ml-auto my-lg-0" id="searchCityForm" name="searchCityForm">
+                <input class="form-control mr-sm-2 w-100" type="text" id="city" name="city" [(ngModel)]="city" (ngModelChange)="cityChanged($event)"
+                    [ngbTypeahead]="getTypeaheadHandler()" [resultFormatter]="formatter" [inputFormatter]="formatter" placeholder="Search city by name">
+                <span *ngIf="isSearching">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </form>
+        </div>
+    </nav>
+</header>
 
-<router-outlet></router-outlet>
+<main class="d-flex h-100">
+    <div class="container h-100">
+        <div class="row h-100" [class.d-none]="isAppRoute">
+            <div class="col">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div class="row h-100" *ngIf="isAppRoute">
+            <div class="col d-flex justify-content-center align-self-center">
+                <h3>Select the city</h3>
+            </div>
+        </div>
+    </div>
+</main>

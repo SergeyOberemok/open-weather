@@ -1,0 +1,1 @@
+export const response = {"data":{"id":1123,"name":"London","country":"GB", "cityId": "1234"}};

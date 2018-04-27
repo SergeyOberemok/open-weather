@@ -1,0 +1,45 @@
+<!-- CITY -->
+<div class="row">
+    <div class="col d-flex justify-content-center">
+        <h4 class="mb-0">{{ city.name }},&nbsp;{{ city.country }}</h4>
+    </div>
+</div>
+<!-- DEGREE -->
+<div class="row">
+    <div class="col d-flex justify-content-center">
+        <h2 class="mb-0">
+            <span>{{ weather.main.temp | number:'1.0-0' }}&deg;</span>
+            <span>{{ units.currentTemperatureChar }}</span>
+        </h2>
+    </div>
+</div>
+<!-- DESCRIPTION -->
+<div class="row mb-2">
+    <div class="col d-flex justify-content-center">
+        {{ weather.description }}
+    </div>
+</div>
+<!-- PARAMS -->
+<div class="row">
+    <div class="col d-flex justify-content-center weather__params">
+        <div>
+            <span class="font-weight-bold">Pressure:</span>
+            <span>{{ weather.main.pressure | number:'1.0-0' }}</span>
+        </div>
+        <div>
+            <span class="font-weight-bold">Humidity:</span>
+            <span>{{ weather.main.humidity }}</span>
+        </div>
+        <div>
+            <span class="font-weight-bold">Wind Speed:</span>
+            <span>{{ weather.wind.speed | number:'1.0-0' }}</span>
+            <span>{{ units.currentSpeedChar }}</span>
+        </div>
+        <div>
+            <span class="font-weight-bold">Clouds:</span>
+            <span>{{ weather.clouds.all }}%</span>
+        </div>
+    </div>
+</div>
+<!-- ICON -->
+<img *ngIf="weather.icon.length > 0" [src]="weather.icon" [alt]="weather.description" class="weather__icon">
